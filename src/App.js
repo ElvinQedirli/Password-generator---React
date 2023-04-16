@@ -39,7 +39,7 @@ function App() {
 
   return (
     <div className='container'>
-      <h2>Şifre Oluşturucu</h2>
+      <h2>Password Generator</h2>
       <Checkbox
         label="Upper Letter"
         checked={useUppercase}
