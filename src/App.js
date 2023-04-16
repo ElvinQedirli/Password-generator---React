@@ -41,22 +41,22 @@ function App() {
     <div className='container'>
       <h2>Şifre Oluşturucu</h2>
       <Checkbox
-        label="Büyük Harfler"
+        label="Upper Letter"
         checked={useUppercase}
         onChange={(e) => setUseUppercase(e.target.checked)}
       />
       <Checkbox
-        label="Küçük Harfler"
+        label="Low letter"
         checked={useLowercase}
         onChange={(e) => setUseLowercase(e.target.checked)}
       />
       <Checkbox
-        label="Rakamlar"
+        label="Numbers"
         checked={useNumbers}
         onChange={(e) => setUseNumbers(e.target.checked)}
       />
       <Checkbox
-        label="Simge"
+        label="Symbols"
         checked={useSymbols}
         onChange={(e) => setUseSymbols(e.target.checked)}
       />
