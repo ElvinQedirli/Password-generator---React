@@ -1,0 +1,11 @@
+label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  input[type='range'] {
+    width: 100%;
+    color: darkblue;
+  }
+  

@@ -1,25 +1,80 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+// COMPONENTS
+import Checkbox from './components/Checkbox.jsx';
+
+// Style
+import './assets/style/pages/App.css'
+
 
 function App() {
+  const [useUppercase, setUseUppercase] = useState(true);
+  const [useLowercase, setUseLowercase] = useState(true);
+  const [useNumbers, setUseNumbers] = useState(true);
+  const [useSymbols, setUseSymbols] = useState(true);
+  const [passwordLength, setPasswordLength] = useState(8);
+  const [generatedPassword, setGeneratedPassword] = useState('');
+
+  const handlePasswordLengthChange = (e) => {
+    setPasswordLength(parseInt(e.target.value));
+  };
+
+  const handleGeneratePasswordClick = () => {
+    let charset = '';
+    if (useUppercase) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (useLowercase) charset += 'abcdefghijklmnopqrstuvwxyz';
+    if (useNumbers) charset += '0123456789';
+    if (useSymbols) charset += '!@#$%^&*()_+~`|}{[]:;?><,./-=';
+
+    let password = '';
+    for (let i = 0; i < passwordLength; i++) {
+      let randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset[randomIndex];
+    }
+
+    setGeneratedPassword(password);
+  };
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='container'>
+      <h2>Şifre Oluşturucu</h2>
+      <Checkbox
+        label="Büyük Harfler"
+        checked={useUppercase}
+        onChange={(e) => setUseUppercase(e.target.checked)}
+      />
+      <Checkbox
+        label="Küçük Harfler"
+        checked={useLowercase}
+        onChange={(e) => setUseLowercase(e.target.checked)}
+      />
+      <Checkbox
+        label="Rakamlar"
+        checked={useNumbers}
+        onChange={(e) => setUseNumbers(e.target.checked)}
+      />
+      <Checkbox
+        label="Simge"
+        checked={useSymbols}
+        onChange={(e) => setUseSymbols(e.target.checked)}
+      />
+ <label htmlFor="password-length-input">
+        Şifre Uzunluğu: {passwordLength}
+      </label>
+      <input
+        id="password-length-input"
+        type="range"
+        min="8"
+        max="32"
+        value={passwordLength}
+        onChange={handlePasswordLengthChange}
+      />
+      <button onClick={handleGeneratePasswordClick}>Şifre Oluştur</button>
+      <p>{generatedPassword}</p>
     </div>
   );
 }
 
-export default App;
+export default App
